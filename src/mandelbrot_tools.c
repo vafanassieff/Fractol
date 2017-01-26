@@ -1,30 +1,40 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   main.c                                             :+:      :+:    :+:   */
+/*   mandelbrot_tools.c                                 :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: vafanass <vafanass@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2017/01/26 12:34:26 by vafanass          #+#    #+#             */
-/*   Updated: 2017/01/26 15:25:18 by vafanass         ###   ########.fr       */
+/*   Created: 2017/01/26 19:43:33 by vafanass          #+#    #+#             */
+/*   Updated: 2017/01/26 20:40:36 by vafanass         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "fractol.h"
 
-int	main(int argc, char **argv)
+t_mandelbrot	mandelbrot_init(void)
 {
-	if (argc != 2)
-		error(ERR_USAGE);
-	if (ft_strcmp(argv[1], "Mandelbrot") == 0)
-		mandelbrot();
-	if (ft_strcmp(argv[1], "Julia") == 0)
-		ft_putendl("salut");
-	if (ft_strcmp(argv[1], "3eme") == 0)
-		ft_putendl("allo");
-	if (ft_strcmp(argv[1], "help") == 0)
-		print_help();
-	else
-		error(ERR_USAGE);
-	return (0);
+	t_mandelbrot	m;
+
+	m.h = SCREEN_Y;
+	m.w = SCREEN_X;
+	m.zoom = 1;
+	m.moveX = -0.5;
+	m.moveY = 0;
+	m.maxIterations = 1000;
+	m.y = -1;
+	return (m);
 }
+
+t_mandelbrot	man_init_bis(t_mandelbrot m)
+{
+	m.pr = 1.5 * (m.x - m.w / 2) / (0.5 * m.zoom * m.w) + m.moveX;
+	m.pi = (m.y - m.h / 2) / (0.5 * m.zoom * m.h) + m.moveY;
+	m.newRe = 0;
+	m.newIm = 0;
+	m.oldRe = 0;
+	m.oldIm = 0;
+	m.i = -1;
+	return (m);
+}
+

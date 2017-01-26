@@ -10,17 +10,16 @@
 #                                                                              #
 #******************************************************************************#
 
-NAME = fdf
-HEADER = fdf.h
+NAME = fractol
+HEADER = fractol.h
 CC = gcc
 CFLAG = -Wall -Werror -Wextra
 SRC_NAME = main.c \
-	   parse_file.c \
-	   utility.c \
-	   util_parsing.c \
-	   display.c \
-	   key_event.c \
-	   util_display.c
+		   utility.c \
+		   mandelbrot.c \
+		   key_event.c \
+		   display_tools.c \
+		   mandelbrot_tools.c
 
 SRC_PATH = src
 SRC = $(addprefix $(SRC_PATH)/,$(SRC_NAME))

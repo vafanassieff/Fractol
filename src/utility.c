@@ -1,30 +1,25 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   main.c                                             :+:      :+:    :+:   */
+/*   utility.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: vafanass <vafanass@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2017/01/26 12:34:26 by vafanass          #+#    #+#             */
-/*   Updated: 2017/01/26 15:25:18 by vafanass         ###   ########.fr       */
+/*   Created: 2017/01/26 13:47:44 by vafanass          #+#    #+#             */
+/*   Updated: 2017/01/26 14:20:57 by vafanass         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "fractol.h"
 
-int	main(int argc, char **argv)
+void	error(char *message)
 {
-	if (argc != 2)
-		error(ERR_USAGE);
-	if (ft_strcmp(argv[1], "Mandelbrot") == 0)
-		mandelbrot();
-	if (ft_strcmp(argv[1], "Julia") == 0)
-		ft_putendl("salut");
-	if (ft_strcmp(argv[1], "3eme") == 0)
-		ft_putendl("allo");
-	if (ft_strcmp(argv[1], "help") == 0)
-		print_help();
-	else
-		error(ERR_USAGE);
-	return (0);
+	ft_putendl(message);
+	exit(0);
+}
+
+void	print_help(void)
+{
+	ft_putendl("Usage for this program :");
+	ft_putendl("./fractol [fractal]\nFractal are :\nMandelbrot\nJulia\n3eme");
 }
