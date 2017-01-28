@@ -6,7 +6,7 @@
 /*   By: vafanass <vafanass@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/01/26 12:35:27 by vafanass          #+#    #+#             */
-/*   Updated: 2017/01/28 16:29:42 by vafanass         ###   ########.fr       */
+/*   Updated: 2017/01/28 17:07:25 by vafanass         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -53,6 +53,8 @@ typedef struct	s_env
 	double		moveY;
 	double		cRe;
 	double		cIm;
+	int			hue;
+	int			value;
 	int			maxIterations;
 	int			h;
 	int			w;

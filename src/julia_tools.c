@@ -6,7 +6,7 @@
 /*   By: vafanass <vafanass@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/01/28 14:13:31 by vafanass          #+#    #+#             */
-/*   Updated: 2017/01/28 16:27:38 by vafanass         ###   ########.fr       */
+/*   Updated: 2017/01/28 17:14:02 by vafanass         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,6 +23,8 @@ void	julia_init(t_env *j)
 	j->cRe = -0.7;
 	j->cIm = 0.27015;
 	j->y = -1;
+	j->hue = 256;
+	j->value = 255;
 }
 
 void	display_julia(t_env j)
@@ -44,7 +46,7 @@ void	display_julia(t_env j)
 				if ((j.newRe * j.newRe + j.newIm * j.newIm) > 4)
 					break ;
 			}
-			j.color = hsv2rgb(j.i % 256, 255, 255 * (j.i < j.maxIterations));
+			j.color = hsv2rgb(j.i % j.hue, 255, j.value * (j.i < j.maxIterations));
 			j.xlen = (j.x * 4) + (j.y * j.isize);
 			put_pixel(j.xlen, j.color, j);
 		}

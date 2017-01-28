@@ -6,7 +6,7 @@
 /*   By: vafanass <vafanass@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/01/26 19:43:33 by vafanass          #+#    #+#             */
-/*   Updated: 2017/01/28 16:29:40 by vafanass         ###   ########.fr       */
+/*   Updated: 2017/01/28 17:14:04 by vafanass         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,6 +21,8 @@ void	mandelbrot_init(t_env *m)
 	m->moveY = 0;
 	m->maxIterations = DEFAULT_I;
 	m->y = -1;
+	m->hue = 256;
+	m->value = 255;
 }
 
 t_env	man_init_bis(t_env m)
@@ -52,7 +54,7 @@ void	display_man(t_env m)
 				if ((m.newRe * m.newRe + m.newIm * m.newIm) > 4)
 					break ;
 			}
-			m.color = hsv2rgb(m.i % 256, 255, 255 * (m.i < m.maxIterations));
+			m.color = hsv2rgb(m.i % m.hue, 255, m.value * (m.i < m.maxIterations));
 			m.xlen = (m.x * 4) + (m.y * m.isize);
 			put_pixel(m.xlen, m.color, m);
 		}
