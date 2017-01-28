@@ -6,7 +6,7 @@
 /*   By: vafanass <vafanass@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/01/26 14:26:14 by vafanass          #+#    #+#             */
-/*   Updated: 2017/01/28 15:13:07 by vafanass         ###   ########.fr       */
+/*   Updated: 2017/01/28 16:27:22 by vafanass         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,6 +16,8 @@ void	choose_type(t_env env)
 {
 	if (env.type == 1)
 		mandel_before(env);
+	if (env.type == 2)
+		julia_before(env);
 }
 void	fractal(t_env e)
 {

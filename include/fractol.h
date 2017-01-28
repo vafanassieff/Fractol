@@ -6,7 +6,7 @@
 /*   By: vafanass <vafanass@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/01/26 12:35:27 by vafanass          #+#    #+#             */
-/*   Updated: 2017/01/28 15:19:07 by vafanass         ###   ########.fr       */
+/*   Updated: 2017/01/28 16:29:42 by vafanass         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,7 +21,7 @@
 
 # define SCREEN_X 800
 # define SCREEN_Y 600
-# define DEFAULT_I 500
+# define DEFAULT_I 100
 
 typedef	struct	s_color
 {
@@ -51,6 +51,8 @@ typedef struct	s_env
 	double		zoom;
 	double		moveX;
 	double		moveY;
+	double		cRe;
+	double		cIm;
 	int			maxIterations;
 	int			h;
 	int			w;
@@ -83,15 +85,14 @@ typedef struct s_colorspace
 
 void			choose_type(t_env env);
 void			mandel_before(t_env m);
-void			print_help(void);
 void			error(char *message);
 void			fractal(t_env e);
 void			display_man(t_env m);
+void            put_pixel(int here, t_color color, t_env env);
 int				key_hook(int keycode, t_env *e);
-void			put_pixel(int here, t_color color, t_env env);
-int				xy_to_x(int x, int y, t_env env);
-t_env			mandelbrot_init(t_env env);
+void			mandelbrot_init(t_env *m);
+void			julia_init(t_env *j);
 t_env		    man_init_bis(t_env m);
 t_color			hsv2rgb(float hue, float saturation, float value);
-
+void			julia_before(t_env j);
 #endif

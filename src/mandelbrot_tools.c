@@ -6,22 +6,21 @@
 /*   By: vafanass <vafanass@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/01/26 19:43:33 by vafanass          #+#    #+#             */
-/*   Updated: 2017/01/28 15:10:54 by vafanass         ###   ########.fr       */
+/*   Updated: 2017/01/28 16:29:40 by vafanass         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "fractol.h"
 
-t_env	mandelbrot_init(t_env m)
+void	mandelbrot_init(t_env *m)
 {
-	m.h = SCREEN_Y;
-	m.w = SCREEN_X;
-	m.zoom = 0.75;
-	m.moveX = 0;
-	m.moveY = 0;
-	m.maxIterations = DEFAULT_I;
-	m.y = -1;
-	return (m);
+	m->h = SCREEN_Y;
+	m->w = SCREEN_X;
+	m->zoom = 0.75;
+	m->moveX = 0;
+	m->moveY = 0;
+	m->maxIterations = DEFAULT_I;
+	m->y = -1;
 }
 
 t_env	man_init_bis(t_env m)

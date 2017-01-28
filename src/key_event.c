@@ -6,7 +6,7 @@
 /*   By: vafanass <vafanass@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/01/26 15:19:31 by vafanass          #+#    #+#             */
-/*   Updated: 2017/01/28 15:13:18 by vafanass         ###   ########.fr       */
+/*   Updated: 2017/01/28 16:29:44 by vafanass         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,7 +29,9 @@ int		key_hook(int keycode, t_env *e)
 	if (keycode == KEY_R)
 	{
 		if (e->type == 1)
-			*e = mandelbrot_init(*e);
+			mandelbrot_init(e);
+		if (e->type == 2)
+			julia_init(e);
 		choose_type(*e);
 	}
 	if (keycode == KEY_LEFT)
@@ -54,7 +56,12 @@ int		key_hook(int keycode, t_env *e)
 	}
 	if (keycode == KEY_I)
 	{
-		e->maxIterations = e->maxIterations + 10;
+		e->maxIterations = e->maxIterations + 5;
+		choose_type(*e);
+	}
+	if (keycode == KEY_O)
+	{
+		e->maxIterations = e->maxIterations - 5;
 		choose_type(*e);
 	}
 	return (0);
