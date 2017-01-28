@@ -6,27 +6,25 @@
 /*   By: vafanass <vafanass@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/01/26 19:43:33 by vafanass          #+#    #+#             */
-/*   Updated: 2017/01/26 20:40:36 by vafanass         ###   ########.fr       */
+/*   Updated: 2017/01/28 15:10:54 by vafanass         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "fractol.h"
 
-t_mandelbrot	mandelbrot_init(void)
+t_env	mandelbrot_init(t_env m)
 {
-	t_mandelbrot	m;
-
 	m.h = SCREEN_Y;
 	m.w = SCREEN_X;
-	m.zoom = 1;
-	m.moveX = -0.5;
+	m.zoom = 0.75;
+	m.moveX = 0;
 	m.moveY = 0;
-	m.maxIterations = 1000;
+	m.maxIterations = DEFAULT_I;
 	m.y = -1;
 	return (m);
 }
 
-t_mandelbrot	man_init_bis(t_mandelbrot m)
+t_env	man_init_bis(t_env m)
 {
 	m.pr = 1.5 * (m.x - m.w / 2) / (0.5 * m.zoom * m.w) + m.moveX;
 	m.pi = (m.y - m.h / 2) / (0.5 * m.zoom * m.h) + m.moveY;
@@ -38,3 +36,34 @@ t_mandelbrot	man_init_bis(t_mandelbrot m)
 	return (m);
 }
 
+void	display_man(t_env m)
+{
+	while (m.y++ < m.h)
+	{
+		m.x = -1;
+		while (m.x++ < m.w)
+		{
+			m = man_init_bis(m);
+			while (m.i++ < m.maxIterations)
+			{
+				m.oldRe = m.newRe;
+				m.oldIm = m.newIm;
+				m.newRe = m.oldRe * m.oldRe - m.oldIm * m.oldIm + m.pr;
+				m.newIm = 2 * m.oldRe * m.oldIm + m.pi;
+				if ((m.newRe * m.newRe + m.newIm * m.newIm) > 4)
+					break ;
+			}
+			m.color = hsv2rgb(m.i % 256, 255, 255 * (m.i < m.maxIterations));
+			m.xlen = (m.x * 4) + (m.y * m.isize);
+			put_pixel(m.xlen, m.color, m);
+		}
+	}
+	m.put = mlx_put_image_to_window(m.mlx, m.win, m.iptr, 0, 0);
+}
+
+void	mandel_before(t_env m)
+{
+	display_man(m);
+	mlx_key_hook(m.win, key_hook, &m);
+	mlx_loop(m.mlx);
+}

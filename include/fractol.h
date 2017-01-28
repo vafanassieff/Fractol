@@ -6,7 +6,7 @@
 /*   By: vafanass <vafanass@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/01/26 12:35:27 by vafanass          #+#    #+#             */
-/*   Updated: 2017/01/26 20:40:38 by vafanass         ###   ########.fr       */
+/*   Updated: 2017/01/28 15:19:07 by vafanass         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,9 +17,11 @@
 # include "mlx.h"
 # include "mlx_key_osx.h"
 # include <math.h>
+# include <stdio.h>
 
-# define SCREEN_X 500
-# define SCREEN_Y 375
+# define SCREEN_X 800
+# define SCREEN_Y 600
+# define DEFAULT_I 500
 
 typedef	struct	s_color
 {
@@ -38,10 +40,7 @@ typedef struct	s_env
 	int			endian;
 	int			isize;
 	int			put;
-}				t_env;
-
-typedef struct	s_mandelbrot
-{
+	int			type;
 	t_color		color;
 	double		pr;
 	double		pi;
@@ -59,7 +58,7 @@ typedef struct	s_mandelbrot
 	int			y;
 	int			i;
 	int			xlen;
-}				t_mandelbrot;
+}				t_env;
 
 typedef struct s_colorspace
 {
@@ -82,14 +81,17 @@ typedef struct s_colorspace
 # define ERR_USAGE "Wrong usage\nUse ./fractol [Mandelbrot] [Julia] [3eme]"
 # define ERR_MLX "Mlx issue\nExiting"
 
+void			choose_type(t_env env);
+void			mandel_before(t_env m);
 void			print_help(void);
 void			error(char *message);
-void			mandelbrot(void);
-int				key_hook(int keycode, t_env *env);
+void			fractal(t_env e);
+void			display_man(t_env m);
+int				key_hook(int keycode, t_env *e);
 void			put_pixel(int here, t_color color, t_env env);
 int				xy_to_x(int x, int y, t_env env);
-t_mandelbrot	mandelbrot_init(void);
-t_mandelbrot    man_init_bis(t_mandelbrot m);
+t_env			mandelbrot_init(t_env env);
+t_env		    man_init_bis(t_env m);
 t_color			hsv2rgb(float hue, float saturation, float value);
 
 #endif

@@ -1,39 +1,30 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   main.c                                             :+:      :+:    :+:   */
+/*   fractal.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: vafanass <vafanass@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2017/01/26 12:34:26 by vafanass          #+#    #+#             */
-/*   Updated: 2017/01/28 15:13:19 by vafanass         ###   ########.fr       */
+/*   Created: 2017/01/26 14:26:14 by vafanass          #+#    #+#             */
+/*   Updated: 2017/01/28 15:13:07 by vafanass         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "fractol.h"
 
-int	main(int argc, char **argv)
+void	choose_type(t_env env)
 {
-	t_env e;
-
-	if (argc != 2)
-		error(ERR_USAGE);
-	if (ft_strcmp(argv[1], "Mandelbrot") == 0)
-	{
-		e.type = 1;
-		e = mandelbrot_init(e);
-		fractal(e);
-	}
-	if (ft_strcmp(argv[1], "Julia") == 0)
-	{
-		e.type = 2;
-		fractal(e);
-	}
-	if (ft_strcmp(argv[1], "3eme") == 0)
-		fractal(e);
-	if (ft_strcmp(argv[1], "help") == 0)
-		print_help();
-	else
-		error(ERR_USAGE);
-	return (0);
+	if (env.type == 1)
+		mandel_before(env);
+}
+void	fractal(t_env e)
+{
+	if (!(e.mlx = mlx_init()))
+		error(ERR_MLX);
+	if (!(e.win = mlx_new_window(e.mlx, SCREEN_X, SCREEN_Y, "Fract'ol")))
+		error(ERR_MLX);
+	if (!(e.iptr = mlx_new_image(e.mlx, SCREEN_X, SCREEN_Y)))
+		error(ERR_MLX);
+	e.img = mlx_get_data_addr(e.iptr, &e.bpp, &e.isize, &e.endian);
+	choose_type(e);
 }

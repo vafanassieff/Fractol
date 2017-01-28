@@ -6,18 +6,56 @@
 /*   By: vafanass <vafanass@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/01/26 15:19:31 by vafanass          #+#    #+#             */
-/*   Updated: 2017/01/26 16:08:18 by vafanass         ###   ########.fr       */
+/*   Updated: 2017/01/28 15:13:18 by vafanass         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "fractol.h"
 
-int		key_hook(int keycode, t_env *env)
+int		key_hook(int keycode, t_env *e)
 {
-		if (keycode == KEY_ESCAPE || keycode == KEY_Q)
-		{
-			env->isize = 1;
-			exit(0);
-		}
-		return (0);
+	if (keycode == KEY_ESCAPE || keycode == KEY_Q)
+		exit(0);
+	if (keycode == KEY_PAD_ADD)
+	{
+		e->zoom = e->zoom * 2;
+		choose_type(*e);
+	}
+	if (keycode == KEY_PAD_SUB)
+	{
+		e->zoom = e->zoom / 2;
+		choose_type(*e);
+	}
+	if (keycode == KEY_R)
+	{
+		if (e->type == 1)
+			*e = mandelbrot_init(*e);
+		choose_type(*e);
+	}
+	if (keycode == KEY_LEFT)
+	{
+		e->moveX = e->moveX - 0.1 / e->zoom;
+		choose_type(*e);
+	}
+	if (keycode == KEY_RIGHT)
+	{
+		e->moveX = e->moveX + 0.1 / e->zoom;
+		choose_type(*e);
+	}
+	if (keycode == KEY_DOWN)
+	{
+		e->moveY = e->moveY + 0.1 / e->zoom;
+		choose_type(*e);
+	}
+	if (keycode == KEY_UP)
+	{
+		e->moveY = e->moveY - 0.1 / e->zoom;
+		choose_type(*e);
+	}
+	if (keycode == KEY_I)
+	{
+		e->maxIterations = e->maxIterations + 10;
+		choose_type(*e);
+	}
+	return (0);
 }

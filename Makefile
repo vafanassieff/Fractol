@@ -16,7 +16,7 @@ CC = gcc
 CFLAG = -Wall -Werror -Wextra
 SRC_NAME = main.c \
 		   utility.c \
-		   mandelbrot.c \
+		   fractal.c \
 		   key_event.c \
 		   display_tools.c \
 		   mandelbrot_tools.c

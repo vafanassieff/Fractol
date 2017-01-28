@@ -6,7 +6,7 @@
 /*   By: vafanass <vafanass@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/01/26 16:08:37 by vafanass          #+#    #+#             */
-/*   Updated: 2017/01/26 20:33:22 by vafanass         ###   ########.fr       */
+/*   Updated: 2017/01/28 11:58:36 by vafanass         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,23 +35,8 @@ t_colorspace	hsv_init(float hue, float saturation, float value)
 	return (c);
 }
 
-t_color			hsv2rgb(float hue, float saturation, float value)
+t_colorspace	hsv2rgbis(t_colorspace c)
 {
-	t_colorspace c;
-
-	c = hsv_init(hue, saturation, value);
-	if (c.ret == 0)
-	{
-		c.r = c.v;
-		c.g = c.t;
-		c.b = c.p;
-	}
-	if (c.ret == 1)
-	{
-		c.r = c.q;
-		c.g = c.v;
-		c.b = c.p;
-	}
 	if (c.ret == 2)
 	{
 		c.r = c.p;
@@ -76,6 +61,27 @@ t_color			hsv2rgb(float hue, float saturation, float value)
 		c.g = c.p;
 		c.b = c.q;
 	}
+	return (c);
+}
+
+t_color			hsv2rgb(float hue, float saturation, float value)
+{
+	t_colorspace c;
+
+	c = hsv_init(hue, saturation, value);
+	if (c.ret == 0)
+	{
+		c.r = c.v;
+		c.g = c.t;
+		c.b = c.p;
+	}
+	if (c.ret == 1)
+	{
+		c.r = c.q;
+		c.g = c.v;
+		c.b = c.p;
+	}
+	c = hsv2rgbis(c);
 	c.color.r = c.r * 255;
 	c.color.g = c.g * 255;
 	c.color.b = c.b * 255;
