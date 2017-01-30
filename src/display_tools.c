@@ -6,17 +6,20 @@
 /*   By: vafanass <vafanass@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/01/26 16:08:37 by vafanass          #+#    #+#             */
-/*   Updated: 2017/01/28 15:33:02 by vafanass         ###   ########.fr       */
+/*   Updated: 2017/01/30 16:22:01 by vafanass         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "fractol.h"
 
-void			put_pixel(int here, t_color color, t_env env)
+void			put_pixel(t_env env)
 {
-	ft_memset(&env.img[0 + here], color.b, 1);
-	ft_memset(&env.img[1 + here], color.g, 1);
-	ft_memset(&env.img[2 + here], color.r, 1);
+	int here;
+
+	here = (env.x * 4) + (env.y * env.isize);
+	ft_memset(&env.img[0 + here], env.color.b, 1);
+	ft_memset(&env.img[1 + here], env.color.g, 1);
+	ft_memset(&env.img[2 + here], env.color.r, 1);
 }
 
 t_colorspace	hsv_init(float hue, float saturation, float value)

@@ -6,7 +6,7 @@
 /*   By: vafanass <vafanass@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/01/26 19:43:33 by vafanass          #+#    #+#             */
-/*   Updated: 2017/01/30 15:05:58 by vafanass         ###   ########.fr       */
+/*   Updated: 2017/01/30 18:00:15 by vafanass         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,10 +16,10 @@ void	mandelbrot_init(t_env *m)
 {
 	m->h = SCREEN_Y;
 	m->w = SCREEN_X;
-	m->zoom = 0.75;
-	m->moveX = 0;
-	m->moveY = 0;
-	m->maxIter = DEFAULT_I;
+	m->zoom = 1;
+	m->movex = -0.5;
+	m->movey = 0;
+	m->maxiter = DEFAULT_I;
 	m->y = -1;
 	m->hue = 256;
 	m->value = 255;
@@ -27,12 +27,12 @@ void	mandelbrot_init(t_env *m)
 
 t_env	man_init_bis(t_env m)
 {
-	m.pr = 1.5 * (m.x - m.w / 2) / (0.5 * m.zoom * m.w) + m.moveX;
-	m.pi = (m.y - m.h / 2) / (0.5 * m.zoom * m.h) + m.moveY;
-	m.newRe = 0;
-	m.newIm = 0;
-	m.oldRe = 0;
-	m.oldIm = 0;
+	m.pr = 1.5 * (m.x - m.w / 2) / (0.5 * m.zoom * m.w) + m.movex;
+	m.pi = (m.y - m.h / 2) / (0.5 * m.zoom * m.h) + m.movey;
+	m.newre = 0;
+	m.newim = 0;
+	m.oldre = 0;
+	m.oldim = 0;
 	m.i = -1;
 	return (m);
 }
@@ -45,26 +45,18 @@ void	display_man(t_env m)
 		while (m.x++ < m.w)
 		{
 			m = man_init_bis(m);
-			while (m.i++ < m.maxIter)
+			while (m.i++ < m.maxiter)
 			{
-				m.oldRe = m.newRe;
-				m.oldIm = m.newIm;
-				m.newRe = m.oldRe * m.oldRe - m.oldIm * m.oldIm + m.pr;
-				m.newIm = 2 * m.oldRe * m.oldIm + m.pi;
-				if ((m.newRe * m.newRe + m.newIm * m.newIm) > 4)
+				m.oldre = m.newre;
+				m.oldim = m.newim;
+				m.newre = m.oldre * m.oldre - m.oldim * m.oldim + m.pr;
+				m.newim = 2 * m.oldre * m.oldim + m.pi;
+				if ((m.newre * m.newre + m.newim * m.newim) > 4)
 					break ;
 			}
-			m.color = hsv2rgb(m.i % m.hue, 255, m.value * (m.i < m.maxIter));
-			m.xlen = (m.x * 4) + (m.y * m.isize);
-			put_pixel(m.xlen, m.color, m);
+			m.color = hsv2rgb(m.i % m.hue, 255, m.value * (m.i < m.maxiter));
+			put_pixel(m);
 		}
 	}
 	m.put = mlx_put_image_to_window(m.mlx, m.win, m.iptr, 0, 0);
-}
-
-void	mandel_before(t_env m)
-{
-	display_man(m);
-	mlx_key_hook(m.win, key_hook, &m);
-	mlx_loop(m.mlx);
 }

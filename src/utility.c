@@ -6,7 +6,7 @@
 /*   By: vafanass <vafanass@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/01/26 13:47:44 by vafanass          #+#    #+#             */
-/*   Updated: 2017/01/28 16:27:14 by vafanass         ###   ########.fr       */
+/*   Updated: 2017/01/30 15:55:52 by vafanass         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,6 +14,6 @@
 
 void	error(char *message)
 {
-	ft_putendl(message);
+	ft_putendl_fd(message, 2);
 	exit(0);
 }

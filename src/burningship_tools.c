@@ -6,7 +6,7 @@
 /*   By: vafanass <vafanass@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/01/30 13:05:46 by vafanass          #+#    #+#             */
-/*   Updated: 2017/01/30 15:05:30 by vafanass         ###   ########.fr       */
+/*   Updated: 2017/01/30 17:05:40 by vafanass         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,9 +17,9 @@ void	burningship_init(t_env *m)
 	m->h = SCREEN_Y;
 	m->w = SCREEN_X;
 	m->zoom = 0.75;
-	m->moveX = -0.5;
-	m->moveY = 0;
-	m->maxIter = DEFAULT_I;
+	m->movex = -0.5;
+	m->movey = 0;
+	m->maxiter = DEFAULT_I;
 	m->y = -1;
 	m->hue = 256;
 	m->value = 255;
@@ -27,12 +27,12 @@ void	burningship_init(t_env *m)
 
 t_env	burning_init_bis(t_env m)
 {
-	m.pr = 1.5 * (m.x - m.w / 2) / (0.5 * m.zoom * m.w) + m.moveX;
-	m.pi = 1.5 * (m.y - m.h / 2) / (0.5 * m.zoom * m.h) + m.moveY;
-	m.newRe = 0;
-	m.newIm = 0;
-	m.oldRe = 0;
-	m.oldIm = 0;
+	m.pr = 1.5 * (m.x - m.w / 2) / (0.5 * m.zoom * m.w) + m.movex;
+	m.pi = 1.5 * (m.y - m.h / 2) / (0.5 * m.zoom * m.h) + m.movey;
+	m.newre = 0;
+	m.newim = 0;
+	m.oldre = 0;
+	m.oldim = 0;
 	m.i = -1;
 	return (m);
 }
@@ -45,26 +45,18 @@ void	display_ship(t_env m)
 		while (m.x++ < m.w)
 		{
 			m = burning_init_bis(m);
-			while (m.i++ < m.maxIter)
+			while (m.i++ < m.maxiter)
 			{
-				m.oldRe = m.newRe;
-				m.oldIm = m.newIm;
-				m.newRe = fabs(m.oldRe * m.oldRe - m.oldIm * m.oldIm + m.pr);
-				m.newIm = fabs(m.oldRe * m.oldIm + m.oldRe * m.oldIm + m.pi);
-				if ((m.newRe * m.newRe + m.newIm * m.newIm) > 10)
+				m.oldre = m.newre;
+				m.oldim = m.newim;
+				m.newre = fabs(m.oldre * m.oldre - m.oldim * m.oldim + m.pr);
+				m.newim = fabs(m.oldre * m.oldim + m.oldre * m.oldim + m.pi);
+				if ((m.newre * m.newre + m.newim * m.newim) > 10)
 					break ;
 			}
-			m.color = hsv2rgb(m.i % m.hue, 255, m.value * (m.i < m.maxIter));
-			m.xlen = (m.x * 4) + (m.y * m.isize);
-			put_pixel(m.xlen, m.color, m);
+			m.color = hsv2rgb(m.i % m.hue, 255, m.value * (m.i < m.maxiter));
+			put_pixel(m);
 		}
 	}
 	m.put = mlx_put_image_to_window(m.mlx, m.win, m.iptr, 0, 0);
-}
-
-void	burningship_before(t_env b)
-{
-	display_ship(b);
-	mlx_key_hook(b.win, key_hook, &b);
-	mlx_loop(b.mlx);
 }

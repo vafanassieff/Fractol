@@ -6,7 +6,7 @@
 /*   By: vafanass <vafanass@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/01/26 12:35:27 by vafanass          #+#    #+#             */
-/*   Updated: 2017/01/30 15:09:48 by vafanass         ###   ########.fr       */
+/*   Updated: 2017/01/30 18:00:18 by vafanass         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,9 +26,9 @@
 
 typedef	struct	s_color
 {
-	char			r;
-	char			g;
-	char			b;
+	char		r;
+	char		g;
+	char		b;
 }				t_color;
 
 typedef struct	s_env
@@ -45,27 +45,28 @@ typedef struct	s_env
 	t_color		color;
 	double		pr;
 	double		pi;
-	double		newRe;
-	double		newIm;
-	double		oldRe;
-	double		oldIm;
+	double		newre;
+	double		newim;
+	double		oldre;
+	double		oldim;
 	double		zoom;
-	double		moveX;
-	double		moveY;
-	double		cRe;
-	double		cIm;
+	double		movex;
+	double		movey;
+	double		cre;
+	double		cim;
 	int			hue;
 	int			value;
-	int			maxIter;
+	int			maxiter;
 	int			h;
 	int			w;
 	int			x;
 	int			y;
 	int			i;
-	int			xlen;
+	int			mousex;
+	int			mousey;
 }				t_env;
 
-typedef struct s_colorspace
+typedef struct	s_colorspace
 {
 	double		r;
 	double		g;
@@ -83,22 +84,25 @@ typedef struct s_colorspace
 	t_color		color;
 }				t_colorspace;
 
-# define ERR_USAGE "Wrong usage\nUse ./fractol [Mandelbrot] [Julia] [3eme]"
+# define ERR_USAGE "Wrong usage\nUse ./fractol [Mandelbrot][Julia][BurningShip]"
 # define ERR_MLX "Mlx issue\nExiting"
 
 void			choose_type(t_env env);
-void			mandel_before(t_env m);
 void			error(char *message);
 void			fractal(t_env e);
 void			display_man(t_env m);
-void            put_pixel(int here, t_color color, t_env env);
-int				key_hook(int keycode, t_env *e);
+void			display_julia(t_env j);
+void			display_ship(t_env m);
+void			put_pixel(t_env env);
 void			mandelbrot_init(t_env *m);
 void			julia_init(t_env *j);
-t_env		    man_init_bis(t_env m);
+void            burningship_init(t_env *s);
+t_env			man_init_bis(t_env m);
 t_color			hsv2rgb(float hue, float saturation, float value);
-void			julia_before(t_env j);
-void			burningship_before(t_env s);
-void			burningship_init(t_env *s);
-
+int             key_hook(int keycode, t_env *e);
+int				keycode_next(int keycode, t_env *e);
+int				keycode_next_bis(int keycode, t_env *e);
+int				keycode_next_ter(int keycode, t_env *e);
+int				mouse_hook(int button, int x, int y, t_env *e);
+int         ft_mouse(int x, int y, t_env *env);
 #endif

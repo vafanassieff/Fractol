@@ -6,7 +6,7 @@
 /*   By: vafanass <vafanass@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/01/26 15:19:31 by vafanass          #+#    #+#             */
-/*   Updated: 2017/01/30 15:09:51 by vafanass         ###   ########.fr       */
+/*   Updated: 2017/01/30 17:19:18 by vafanass         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,42 +36,60 @@ int		key_hook(int keycode, t_env *e)
 			burningship_init(e);
 		choose_type(*e);
 	}
+	keycode_next(keycode, e);
+	return (0);
+}
+
+int		keycode_next(int keycode, t_env *e)
+{
 	if (keycode == KEY_LEFT)
 	{
-		e->moveX = e->moveX - 0.1 / e->zoom;
+		e->movex = e->movex - 0.2 / e->zoom;
 		choose_type(*e);
 	}
 	if (keycode == KEY_RIGHT)
 	{
-		e->moveX = e->moveX + 0.1 / e->zoom;
+		e->movex = e->movex + 0.2 / e->zoom;
 		choose_type(*e);
 	}
 	if (keycode == KEY_DOWN)
 	{
-		e->moveY = e->moveY + 0.1 / e->zoom;
+		e->movey = e->movey + 0.2 / e->zoom;
 		choose_type(*e);
 	}
 	if (keycode == KEY_UP)
 	{
-		e->moveY = e->moveY - 0.1 / e->zoom;
+		e->movey = e->movey - 0.2 / e->zoom;
 		choose_type(*e);
 	}
+	keycode_next_bis(keycode, e);
+	return (0);
+}
+
+int		keycode_next_bis(int keycode, t_env *e)
+{
 	if (keycode == KEY_I)
 	{
-		e->maxIter = e->maxIter + STEP;
+		e->maxiter = e->maxiter + STEP;
 		choose_type(*e);
 	}
 	if (keycode == KEY_O)
 	{
-		e->maxIter = e->maxIter - STEP;
+		e->maxiter = e->maxiter - STEP;
 		choose_type(*e);
 	}
 	if (keycode == KEY_SHIFT_LEFT)
 	{
 		e->hue = e->hue - 10;
-		e->value = e->value -10;
+		e->value = e->value - 10;
 		choose_type(*e);
 	}
+	keycode_next_ter(keycode, e);
+	return (0);
+}
+
+int		keycode_next_ter(int keycode, t_env *e)
+{
 	if (keycode == KEY_1)
 	{
 		e->type = 1;
