@@ -6,7 +6,7 @@
 /*   By: vafanass <vafanass@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/01/26 12:35:27 by vafanass          #+#    #+#             */
-/*   Updated: 2017/01/28 17:07:25 by vafanass         ###   ########.fr       */
+/*   Updated: 2017/01/30 15:09:48 by vafanass         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,6 +22,7 @@
 # define SCREEN_X 800
 # define SCREEN_Y 600
 # define DEFAULT_I 100
+# define STEP 5
 
 typedef	struct	s_color
 {
@@ -55,7 +56,7 @@ typedef struct	s_env
 	double		cIm;
 	int			hue;
 	int			value;
-	int			maxIterations;
+	int			maxIter;
 	int			h;
 	int			w;
 	int			x;
@@ -97,4 +98,7 @@ void			julia_init(t_env *j);
 t_env		    man_init_bis(t_env m);
 t_color			hsv2rgb(float hue, float saturation, float value);
 void			julia_before(t_env j);
+void			burningship_before(t_env s);
+void			burningship_init(t_env *s);
+
 #endif

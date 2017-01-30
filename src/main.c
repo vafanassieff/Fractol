@@ -6,7 +6,7 @@
 /*   By: vafanass <vafanass@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/01/26 12:34:26 by vafanass          #+#    #+#             */
-/*   Updated: 2017/01/28 16:29:37 by vafanass         ###   ########.fr       */
+/*   Updated: 2017/01/30 14:37:17 by vafanass         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,11 +30,12 @@ int	main(int argc, char **argv)
 		julia_init(&e);
 		fractal(e);
 	}
-	if (ft_strcmp(argv[1], "3eme") == 0)
+	if (ft_strcmp(argv[1], "BurningShip") == 0)
+	{
+		e.type = 3;
+		burningship_init(&e);
 		fractal(e);
-	if (ft_strcmp(argv[1], "help") == 0)
-		error(ERR_USAGE);
-	else
-		error(ERR_USAGE);
+	}
+	error(ERR_USAGE);
 	return (0);
 }

@@ -6,7 +6,7 @@
 /*   By: vafanass <vafanass@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/01/26 15:19:31 by vafanass          #+#    #+#             */
-/*   Updated: 2017/01/28 17:36:39 by vafanass         ###   ########.fr       */
+/*   Updated: 2017/01/30 15:09:51 by vafanass         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,6 +32,8 @@ int		key_hook(int keycode, t_env *e)
 			mandelbrot_init(e);
 		if (e->type == 2)
 			julia_init(e);
+		if (e->type == 3)
+			burningship_init(e);
 		choose_type(*e);
 	}
 	if (keycode == KEY_LEFT)
@@ -56,12 +58,12 @@ int		key_hook(int keycode, t_env *e)
 	}
 	if (keycode == KEY_I)
 	{
-		e->maxIterations = e->maxIterations + 5;
+		e->maxIter = e->maxIter + STEP;
 		choose_type(*e);
 	}
 	if (keycode == KEY_O)
 	{
-		e->maxIterations = e->maxIterations - 5;
+		e->maxIter = e->maxIter - STEP;
 		choose_type(*e);
 	}
 	if (keycode == KEY_SHIFT_LEFT)
@@ -80,6 +82,12 @@ int		key_hook(int keycode, t_env *e)
 	{
 		e->type = 2;
 		julia_init(e);
+		choose_type(*e);
+	}
+	if (keycode == KEY_3)
+	{
+		e->type = 3;
+		burningship_init(e);
 		choose_type(*e);
 	}
 	return (0);
