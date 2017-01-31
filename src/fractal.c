@@ -6,7 +6,7 @@
 /*   By: vafanass <vafanass@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/01/26 14:26:14 by vafanass          #+#    #+#             */
-/*   Updated: 2017/01/30 18:00:20 by vafanass         ###   ########.fr       */
+/*   Updated: 2017/01/31 17:12:41 by vafanass         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,6 +24,7 @@ void	choose_type(t_env env)
 
 void	fractal(t_env e)
 {
+	e.mouselock = 1;
 	if (!(e.mlx = mlx_init()))
 		error(ERR_MLX);
 	if (!(e.win = mlx_new_window(e.mlx, SCREEN_X, SCREEN_Y, "Fract'ol")))

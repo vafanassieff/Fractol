@@ -6,7 +6,7 @@
 /*   By: vafanass <vafanass@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/01/26 15:19:31 by vafanass          #+#    #+#             */
-/*   Updated: 2017/01/30 17:19:18 by vafanass         ###   ########.fr       */
+/*   Updated: 2017/01/31 18:02:10 by vafanass         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -107,6 +107,26 @@ int		keycode_next_ter(int keycode, t_env *e)
 		e->type = 3;
 		burningship_init(e);
 		choose_type(*e);
+	}
+	keycode_next_quater(keycode, e);
+	return (0);
+}
+
+int		keycode_next_quater(int keycode, t_env *e)
+{
+	if (keycode == KEY_L)
+	{
+		if (e->mouselock == 1)
+		{
+			e->mouselock = 0;
+			choose_type(*e);
+			return (0);
+		}
+		if (e->mouselock == 0)
+		{
+			e->mouselock = 1;
+			choose_type(*e);
+		}
 	}
 	return (0);
 }

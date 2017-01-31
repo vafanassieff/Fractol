@@ -6,7 +6,7 @@
 /*   By: vafanass <vafanass@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/01/26 12:35:27 by vafanass          #+#    #+#             */
-/*   Updated: 2017/01/30 18:00:18 by vafanass         ###   ########.fr       */
+/*   Updated: 2017/01/31 17:44:53 by vafanass         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,6 +23,7 @@
 # define SCREEN_Y 600
 # define DEFAULT_I 100
 # define STEP 5
+# define PADDLE 0.01
 
 typedef	struct	s_color
 {
@@ -64,6 +65,9 @@ typedef struct	s_env
 	int			i;
 	int			mousex;
 	int			mousey;
+	int			oldmousex;
+	int			oldmousey;
+	char		mouselock;
 }				t_env;
 
 typedef struct	s_colorspace
@@ -103,6 +107,7 @@ int             key_hook(int keycode, t_env *e);
 int				keycode_next(int keycode, t_env *e);
 int				keycode_next_bis(int keycode, t_env *e);
 int				keycode_next_ter(int keycode, t_env *e);
+int				keycode_next_quater(int keycode, t_env *e);
 int				mouse_hook(int button, int x, int y, t_env *e);
-int         ft_mouse(int x, int y, t_env *env);
+int				ft_mouse(int x, int y, t_env *env);
 #endif
