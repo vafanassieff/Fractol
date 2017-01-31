@@ -6,7 +6,7 @@
 /*   By: vafanass <vafanass@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/01/26 19:43:33 by vafanass          #+#    #+#             */
-/*   Updated: 2017/01/30 18:00:15 by vafanass         ###   ########.fr       */
+/*   Updated: 2017/01/31 20:17:10 by vafanass         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,7 +17,7 @@ void	mandelbrot_init(t_env *m)
 	m->h = SCREEN_Y;
 	m->w = SCREEN_X;
 	m->zoom = 1;
-	m->movex = -0.5;
+	m->movex = 0;
 	m->movey = 0;
 	m->maxiter = DEFAULT_I;
 	m->y = -1;
