@@ -6,18 +6,28 @@
 /*   By: vafanass <vafanass@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/01/26 12:34:26 by vafanass          #+#    #+#             */
-/*   Updated: 2017/01/30 15:53:10 by vafanass         ###   ########.fr       */
+/*   Updated: 2017/02/02 19:35:10 by vafanass         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "fractol.h"
 
-int	main(int argc, char **argv)
+void	parse_arg(char *arg, t_env e)
+{
+	if (ft_strcmp(arg, "Tricorn") == 0)
+	{
+		e.type = 4;
+		mandelbrot_init(&e);
+		fractal(e);
+	}
+}
+
+int		main(int argc, char **argv)
 {
 	t_env e;
 
 	if (argc != 2)
-		error(ERR_USAGE);
+		error_usage(ERR_USAGE);
 	if (ft_strcmp(argv[1], "Mandelbrot") == 0)
 	{
 		e.type = 1;
@@ -36,6 +46,7 @@ int	main(int argc, char **argv)
 		burningship_init(&e);
 		fractal(e);
 	}
-	error(ERR_USAGE);
+	parse_arg(argv[1], e);
+	error_usage(ERR_USAGE);
 	return (0);
 }

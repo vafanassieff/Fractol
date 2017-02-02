@@ -6,7 +6,7 @@
 /*   By: vafanass <vafanass@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/01/26 19:43:33 by vafanass          #+#    #+#             */
-/*   Updated: 2017/01/31 20:17:10 by vafanass         ###   ########.fr       */
+/*   Updated: 2017/02/02 19:18:46 by vafanass         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,13 +16,14 @@ void	mandelbrot_init(t_env *m)
 {
 	m->h = SCREEN_Y;
 	m->w = SCREEN_X;
-	m->zoom = 1;
+	m->zoom = 0.5;
 	m->movex = 0;
 	m->movey = 0;
 	m->maxiter = DEFAULT_I;
 	m->y = -1;
 	m->hue = 256;
 	m->value = 255;
+	m->vx = 2;
 }
 
 t_env	man_init_bis(t_env m)
@@ -50,7 +51,7 @@ void	display_man(t_env m)
 				m.oldre = m.newre;
 				m.oldim = m.newim;
 				m.newre = m.oldre * m.oldre - m.oldim * m.oldim + m.pr;
-				m.newim = 2 * m.oldre * m.oldim + m.pi;
+				m.newim = m.vx * m.oldre * m.oldim + m.pi;
 				if ((m.newre * m.newre + m.newim * m.newim) > 4)
 					break ;
 			}

@@ -6,7 +6,7 @@
 /*   By: vafanass <vafanass@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/01/26 12:35:27 by vafanass          #+#    #+#             */
-/*   Updated: 2017/01/31 17:44:53 by vafanass         ###   ########.fr       */
+/*   Updated: 2017/02/02 19:35:12 by vafanass         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,11 +19,13 @@
 # include <math.h>
 # include <stdio.h>
 
+# define WIN_Y 700
 # define SCREEN_X 800
 # define SCREEN_Y 600
-# define DEFAULT_I 100
-# define STEP 5
+# define DEFAULT_I 20
+# define STEP 1
 # define PADDLE 0.01
+# define WHITE 0x00FFFFFF
 
 typedef	struct	s_color
 {
@@ -68,6 +70,7 @@ typedef struct	s_env
 	int			oldmousex;
 	int			oldmousey;
 	char		mouselock;
+	int			vx;
 }				t_env;
 
 typedef struct	s_colorspace
@@ -100,10 +103,12 @@ void			display_ship(t_env m);
 void			put_pixel(t_env env);
 void			mandelbrot_init(t_env *m);
 void			julia_init(t_env *j);
-void            burningship_init(t_env *s);
+void			burningship_init(t_env *s);
+void			display_ui(t_env *e);
+void			error_usage(char *message);
 t_env			man_init_bis(t_env m);
 t_color			hsv2rgb(float hue, float saturation, float value);
-int             key_hook(int keycode, t_env *e);
+int				key_hook(int keycode, t_env *e);
 int				keycode_next(int keycode, t_env *e);
 int				keycode_next_bis(int keycode, t_env *e);
 int				keycode_next_ter(int keycode, t_env *e);

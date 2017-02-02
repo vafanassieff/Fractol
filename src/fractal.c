@@ -6,7 +6,7 @@
 /*   By: vafanass <vafanass@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/01/26 14:26:14 by vafanass          #+#    #+#             */
-/*   Updated: 2017/01/31 17:12:41 by vafanass         ###   ########.fr       */
+/*   Updated: 2017/02/02 19:13:13 by vafanass         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,6 +20,12 @@ void	choose_type(t_env env)
 		display_julia(env);
 	if (env.type == 3)
 		display_ship(env);
+	if (env.type == 4)
+	{
+		env.vx = -2;
+		display_man(env);
+	}
+	display_ui(&env);
 }
 
 void	fractal(t_env e)
@@ -27,9 +33,9 @@ void	fractal(t_env e)
 	e.mouselock = 1;
 	if (!(e.mlx = mlx_init()))
 		error(ERR_MLX);
-	if (!(e.win = mlx_new_window(e.mlx, SCREEN_X, SCREEN_Y, "Fract'ol")))
+	if (!(e.win = mlx_new_window(e.mlx, SCREEN_X, WIN_Y, "Fract'ol")))
 		error(ERR_MLX);
-	if (!(e.iptr = mlx_new_image(e.mlx, SCREEN_X, SCREEN_Y)))
+	if (!(e.iptr = mlx_new_image(e.mlx, SCREEN_X, WIN_Y)))
 		error(ERR_MLX);
 	e.img = mlx_get_data_addr(e.iptr, &e.bpp, &e.isize, &e.endian);
 	choose_type(e);
