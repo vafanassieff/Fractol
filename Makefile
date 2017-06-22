@@ -22,7 +22,8 @@ SRC_NAME = main.c \
 		   mandelbrot_tools.c \
 		   julia_tools.c \
 		   burningship_tools.c \
-		   mouse_event.c
+		   mouse_event.c \
+		   fractol_ui.c
 
 SRC_PATH = src
 SRC = $(addprefix $(SRC_PATH)/,$(SRC_NAME))
